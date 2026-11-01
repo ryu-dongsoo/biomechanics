@@ -1,6 +1,6 @@
 # 제4주차: 상대운동 및 구속운동 동역학 실습 (Relative & Constrained Motion)
 
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 ---
 

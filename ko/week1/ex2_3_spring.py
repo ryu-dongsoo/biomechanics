@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 # 예제 2.3: 가속도가 위치의 함수일 때 (a = -k^2 * s)
 # 조화 진동 모델 및 기계적 도식화 시각화 (교재 그림 재현)
 

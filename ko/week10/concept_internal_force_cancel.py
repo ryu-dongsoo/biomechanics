@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 """
 보충 개념 애니메이션 2: 두 물체 충돌 시 내부 작용·반작용 충격량 상쇄와 선형 운동량 보존 원리
 동역학 9판 (한국어판) - 제3장 3.9절 선형 운동량 보존 (교재 그림 3/13 원리 시각화)

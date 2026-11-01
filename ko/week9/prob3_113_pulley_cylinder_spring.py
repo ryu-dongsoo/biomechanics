@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 """
 동역학 9판 제3장 B편: 일과 에너지 (Section 3.7 위치에너지 및 기계적 에너지 보존)
 연습문제 기초 3 (Problem 3/113) - 도르래-스프링 현수 실린더의 일-에너지 해석

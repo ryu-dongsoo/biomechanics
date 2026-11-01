@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 """
 보충 개념 애니메이션 1: 내력 쌍 상쇄(Σf_i = 0)와 질량중심의 매끄러운 궤적 (ΣF_ext = m a_bar)
 동역학 9판 (한국어판) - 제4장 4.1~4.2절 일반화된 뉴턴의 제2법칙 (식 4.1 원리 시각화)

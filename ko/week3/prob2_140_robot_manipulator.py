@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 # 문제 2/140: 산업용 로봇의 원통좌표계(r-θ-z) 운동학
 # 수직축 회전(omega), 수직 신축(h), 수평 신축(l) 로봇 암과 선단 P의 속도/가속도 실시간 3D 시뮬레이션 (과제 힌트 및 정답 모드)
 

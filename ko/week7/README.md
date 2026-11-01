@@ -1,4 +1,4 @@
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 # 7주차: 질점의 운동역학 — 제3장 B편: 일과 에너지 (Work and Energy)
 

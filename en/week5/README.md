@@ -1,6 +1,6 @@
 # Week 5: Particle Kinetics (Rectilinear Motion F=ma & Rectangular Coordinates)
 
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 ---
 

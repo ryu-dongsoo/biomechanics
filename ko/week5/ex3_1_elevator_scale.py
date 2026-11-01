@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 """
 [동역학 9판 예제 3.1] 엘리베이터 승객과 스프링 저울의 뉴턴 제2법칙(F=ma) 해석
 """
@@ -115,7 +126,7 @@ def update(frame):
     ax.text(fbd_x + 2.2, cm_y, r'$a_y$', fontsize=9.5, fontweight='bold', color='#16a34a', va='center', zorder=7)
     
     # HUD Box
-            hud_str = (
+    hud_str = (
                 f"[동역학 9판 예제 3.1: 엘리베이터 & 저울 F=ma]\n"
                 f"시간 t = {t:4.2f} s / {duration:.1f} s\n"
                 f"--------------------------------------------------\n"
@@ -126,7 +137,7 @@ def update(frame):
                 f"--------------------------------------------------\n"
                 f"▶ 저울 지시 수직항력: R = 830 N\n"
                 f"▶ 3초 후 상승 속도:   v = a_y·t = {v_curr:4.2f} m/s (최종 3.77 m/s)"
-            )
+    )
     ax.text(-15.0, 21.0, hud_str, fontsize=7.8, va='top', family='monospace', fontproperties=font_prop,
             bbox=dict(boxstyle='round,pad=0.4', facecolor='#ffffff', edgecolor='#0284c7', lw=1.4, alpha=0.95), zorder=20)
 

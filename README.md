@@ -1,6 +1,6 @@
 # ⚙️ 생물역학 실습 | Biomechanics Lab
 
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 > **이중 언어 저장소 (Bilingual Repository)**  
 > 본 저장소는 한국어와 영어 두 가지 언어로 제공됩니다.  
@@ -113,6 +113,7 @@ biomechanics/
 *© 2026 Biomechanics Lab Course — Jeonbuk National University*
 
 ## 📝 변경 이력 (Changelog)
+- **2026-11-02 06:45:00** [[유동수 (Dongsoo Ryu)](mailto:ryudongsoo@jbnu.ac.kr)] docs: 전 주차 한·영 실습 코드(253종) 최상단 저작권·소속·성명·이메일(jbnu/gmail 2종) 명시
 - **2026-11-01 23:35:00** [[Dongsoo Ryu](mailto:ryudongsoo@jbnu.ac.kr)] feat: 1~15주차 생물역학 한·영 시뮬레이션 포트폴리오 및 보충 개념 애니메이션 통합 배포
 - **2026-10-23 19:32:00** [[ryu-dongsoo](mailto:ryudongsoo@jbnu.ac.kr)] docs: 10주차(선형 충격량·운동량 Ch.3.8~3.9), 11주차(각 충격량·각운동량 및 제3장 총괄 정리 Ch.3.10), 12~14주차(제4장 질점계) 커리큘럼 개편 반영
 - **2026-05-22 18:50:00** [[ryu-dongsoo](mailto:ryudongsoo@jbnu.ac.kr)] init: 생물역학 실습 저장소 기본 구조 생성

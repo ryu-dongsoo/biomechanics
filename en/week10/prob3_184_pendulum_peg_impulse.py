@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 Dongsoo Ryu (유동수). All rights reserved.
+#   - Affiliation : Dept. of Bioindustrial Machinery Engineering,
+#                   Jeonbuk National University (전북대학교 생물산업기계공학과)
+#   - Author      : Dongsoo Ryu (유동수)
+#   - Contact     : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - Course      : Biomechanics (생물역학)
+# =============================================================================
+
 """
 Engineering Mechanics: Dynamics 9th Ed. Chapter 3 Part C (Section 3.10 Angular Impulse & Momentum)
 Problem 3/184 - Two Spheres Sliding Outward (r -> 2r) on a Freely Rotating Horizontal Rod

@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 Dongsoo Ryu (유동수). All rights reserved.
+#   - Affiliation : Dept. of Bioindustrial Machinery Engineering,
+#                   Jeonbuk National University (전북대학교 생물산업기계공학과)
+#   - Author      : Dongsoo Ryu (유동수)
+#   - Contact     : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - Course      : Biomechanics (생물역학)
+# =============================================================================
+
 # Problem 2/136: Radar Tracking of Jet Aircraft and Velocity Decomposition in Spherical Coordinates (R-θ-φ)
 # Real-time 3D simulation with homework hints and exact analytical answers
 

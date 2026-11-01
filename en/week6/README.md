@@ -1,4 +1,4 @@
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 # Week 6: Kinetics of Particles — Chapter 3: Curvilinear Motion (n-t and r-θ Coordinates)
 

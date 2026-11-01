@@ -1,4 +1,14 @@
 # -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 """
 [동역학 9판 문제 3/15] 경사면 위 카트의 케이블 견인각(15°)과 장력별 가속도(F=ma) 해석
 교재 원본 삽화(인부, 도르래 브래킷, 카트, 20° 경사 지형) 100% 동일 구현 + 3패널 분리형 FBD

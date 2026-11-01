@@ -1,4 +1,14 @@
 # -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 """
 [동역학 9판 예제 3.3] 30° 경사면 통나무(200kg)와 2:1 복합 도르래 블록(125kg)의 FBD 및 접촉 속도 해석
 교재 원본 삽화, 2:1 도르래 완벽 결선 및 분리형 FBD 100% 동일 구현

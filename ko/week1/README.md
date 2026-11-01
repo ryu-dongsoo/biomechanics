@@ -1,6 +1,6 @@
 # 🛠️ 1주차 실습: 직선운동 문제 풀이 (Rectilinear Motion)
 
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 [뒤로가기(한국어 메인)](../README.md)
 

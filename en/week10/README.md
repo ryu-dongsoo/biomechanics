@@ -1,4 +1,4 @@
-> **Author / Rights Holder:** Dongsoo Ryu, Ph.D. (ryudongsoo@jbnu.ac.kr), Department of Bio-Industrial Machinery Engineering, Jeonbuk National University
+> **Author / Rights Holder:** Dongsoo Ryu, Ph.D. (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com), Department of Bio-Industrial Machinery Engineering, Jeonbuk National University
 
 # Week 10: Particle Kinetics — Chapter 3 Part C: Linear and Angular Impulse & Momentum
 

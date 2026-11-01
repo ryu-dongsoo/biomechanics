@@ -1,4 +1,4 @@
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 # 6주차: 질점의 운동역학 — 제3장: 곡선운동 (n-t 자연좌표계 및 r-θ 극좌표계)
 

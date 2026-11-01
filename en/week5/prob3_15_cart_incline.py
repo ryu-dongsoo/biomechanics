@@ -1,4 +1,13 @@
 # -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 Dongsoo Ryu (유동수). All rights reserved.
+#   - Affiliation : Dept. of Bioindustrial Machinery Engineering,
+#                   Jeonbuk National University (전북대학교 생물산업기계공학과)
+#   - Author      : Dongsoo Ryu (유동수)
+#   - Contact     : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - Course      : Biomechanics (생물역학)
+# =============================================================================
+
 """
 [Dynamics 9th Ed. Problem 3/15] Acceleration and Kinetics of Cart on Incline with Cable Traction (15°)
 Reproducing Textbook Illustration (Worker, Pulley Bracket, Cart, Incline) + 3-Panel FBD Architecture

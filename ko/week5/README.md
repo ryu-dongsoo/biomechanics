@@ -1,6 +1,6 @@
 # 제5주차: 질점의 운동역학 (직선운동 F=ma 직교좌표계 실습)
 
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 ---
 

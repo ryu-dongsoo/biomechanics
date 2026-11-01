@@ -1,4 +1,4 @@
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 # Week 13: Kinetics of Systems of Particles III — Chapter 4 Section 4.6: Steady Mass Flow
 

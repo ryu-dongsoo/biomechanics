@@ -1,4 +1,14 @@
 # -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 """
 [동역학 9판 예제 3.5] 수직 가이드 봉을 따라 움직이는 칼라의 방향 가변 외력(θ=kt) 하에서의 FBD 및 운동역학
 교재 원본 삽화 및 완벽한 분리형 FBD 100% 동일 구현 + 고리 작동 범위(Stroke) 뷰포트 내 완벽 수용

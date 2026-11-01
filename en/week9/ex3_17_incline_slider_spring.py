@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 Dongsoo Ryu (유동수). All rights reserved.
+#   - Affiliation : Dept. of Bioindustrial Machinery Engineering,
+#                   Jeonbuk National University (전북대학교 생물산업기계공학과)
+#   - Author      : Dongsoo Ryu (유동수)
+#   - Contact     : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - Course      : Biomechanics (생물역학)
+# =============================================================================
+
 """
 Engineering Dynamics (9th Ed.) Chapter 3 Section B: Work and Energy (Section 3.7 Potential Energy & Nonconservative Work)
 Sample Problem 3.17 (Sample Problem 3/17) - Incline Slider with Spring & Cable Pull

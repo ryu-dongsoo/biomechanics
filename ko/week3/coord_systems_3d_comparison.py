@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 # 3차원 공간 직각좌표계, 원통좌표계, 구면좌표계 정밀 비교 시각화
 # 상단 1행 (3열): (a) 직각좌표계, (b) 원통좌표계, (c) 구면좌표계 3D 뷰 (제목 하단 배치)
 # 하단 2행 (2열): (d) 3차원 통합 중첩 비교 (제목 하단 배치) + 전용 [변환 관계식 및 선택 가이드 카드]

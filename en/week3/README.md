@@ -1,6 +1,6 @@
 # 🛠️ Week 3 Lab: n-t, Polar (r-θ), Cylindrical, and Spherical Coordinates
 
-> **Author / Rights Holder:** Dongsoo Ryu, Dept. of Biosystems Machinery Engineering, Jeonbuk National University (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** Dongsoo Ryu, Dept. of Biosystems Machinery Engineering, Jeonbuk National University (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 [Back to English Main](../README.md)
 

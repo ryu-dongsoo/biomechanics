@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 Dongsoo Ryu (유동수). All rights reserved.
+#   - Affiliation : Dept. of Bioindustrial Machinery Engineering,
+#                   Jeonbuk National University (전북대학교 생물산업기계공학과)
+#   - Author      : Dongsoo Ryu (유동수)
+#   - Contact     : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - Course      : Biomechanics (생물역학)
+# =============================================================================
+
 """
 [Dynamics 9th Ed. Sample 3/1] Newton 2nd Law (F=ma) for Elevator & Scale
 """
@@ -115,7 +125,7 @@ def update(frame):
     ax.text(fbd_x + 2.2, cm_y, r'$a_y$', fontsize=9.5, fontweight='bold', color='#16a34a', va='center', zorder=7)
     
     # HUD Box
-            hud_str = (
+    hud_str = (
                 f"[Dynamics 9th Ed. Sample Problem 3/1: Elevator & Scale]\n"
                 f"Time t = {t:4.2f} s / {duration:.1f} s\n"
                 f"--------------------------------------------------\n"
@@ -126,7 +136,7 @@ def update(frame):
                 f"--------------------------------------------------\n"
                 f"▶ Scale Reading (Normal Force): R = 830 N\n"
                 f"▶ Velocity after 3 s:           v = a_y·t = {v_curr:4.2f} m/s (Final 3.77 m/s)"
-            )
+    )
     ax.text(-15.0, 21.0, hud_str, fontsize=7.8, va='top', family='monospace', fontproperties=font_prop,
             bbox=dict(boxstyle='round,pad=0.4', facecolor='#ffffff', edgecolor='#0284c7', lw=1.4, alpha=0.95), zorder=20)
 

@@ -1,3 +1,14 @@
+# -*- coding: utf-8 -*-
+# =============================================================================
+# Copyright (c) 2026 유동수 (Dongsoo Ryu). All rights reserved.
+#   - 소속 (Affiliation) : 전북대학교 생물산업기계공학과
+#                          (Dept. of Bioindustrial Machinery Engineering,
+#                           Jeonbuk National University)
+#   - 성명 (Author)      : 유동수 (Dongsoo Ryu)
+#   - 이메일 (Contact)   : ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com
+#   - 교과목 (Course)    : 생물역학 (Biomechanics)
+# =============================================================================
+
 # 예제 2.10: 극좌표계 레이더 추적 (Radar Tracking)
 # 교재 삽화 완벽 재현 (수직 기준 각도 theta, r 벡터, +r/+theta 축, 회전형 레이더, 탄도 포물선 궤적)
 
@@ -329,4 +340,3 @@ try:
     print("theta=30도 지점 2.5초 정지 및 마지막 프레임 4초 정지 패치 적용 완료! [완료]")
 except Exception as e:
     print(f"딜레이 연장 패치 예외: {e}")
-

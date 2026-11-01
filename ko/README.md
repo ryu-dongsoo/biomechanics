@@ -1,6 +1,6 @@
 # ⚙️ 생물역학 실습 포트폴리오 (Korean)
 
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 [뒤로가기(언어 선택)](../README.md)
 

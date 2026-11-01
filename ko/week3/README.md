@@ -1,6 +1,6 @@
 # 🛠️ 3주차 실습: 법선-접선좌표(n-t), 극좌표(r-θ) 및 원통/구면좌표계
 
-> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr)
+> **Author / Rights Holder:** 전북대학교 생물산업기계공학과 유동수 (ryudongsoo@jbnu.ac.kr, ryudongsoo@gmail.com)
 
 [뒤로가기(한국어 메인)](../README.md)
 
