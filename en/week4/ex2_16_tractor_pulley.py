@@ -1,0 +1,272 @@
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+import matplotlib.patches as patches
+from matplotlib.animation import FuncAnimation, PillowWriter
+
+# Font configuration
+font_path = 'C:/Windows/Fonts/malgun.ttf'
+if os.path.exists(font_path):
+    fm.fontManager.addfont(font_path)
+    font_prop = fm.FontProperties(fname=font_path)
+    plt.rcParams['font.family'] = font_prop.get_name()
+else:
+    font_prop = fm.FontProperties(family='sans-serif')
+plt.rcParams['axes.unicode_minus'] = False
+
+h = 10.0
+vA_val = 3.0
+x0 = 3.0
+y0 = 2.0
+L_cable = 2.0 * (h - y0) + np.sqrt(h**2 + x0**2)
+
+fps = 30
+duration = 3.5
+n_frames = int(fps * duration)
+t_eval = np.linspace(0, duration, n_frames)
+
+def draw_pulley(ax, cx, cy, r, color='#38bdf8', ec='#0284c7', lw=1.6):
+    sheave = patches.Circle((cx, cy), r, fc=color, ec=ec, lw=lw, zorder=5)
+    ax.add_patch(sheave)
+    rim = patches.Circle((cx, cy), r * 0.65, fc='#e0f2fe', ec=ec, lw=1.0, zorder=6)
+    ax.add_patch(rim)
+    hub = patches.Circle((cx, cy), r * 0.22, fc='#0f172a', ec='#0284c7', lw=1.0, zorder=7)
+    ax.add_patch(hub)
+
+def draw_tractor(ax, x_hitch, y_ground, scale=1.35):
+    body_poly = patches.Polygon([
+        (x_hitch + 0.7 * scale, y_ground + 0.7 * scale),
+        (x_hitch + 0.7 * scale, y_ground + 1.4 * scale),
+        (x_hitch + 1.9 * scale, y_ground + 1.4 * scale),
+        (x_hitch + 3.1 * scale, y_ground + 1.15 * scale),
+        (x_hitch + 3.1 * scale, y_ground + 0.4 * scale),
+        (x_hitch + 1.9 * scale, y_ground + 0.4 * scale),
+        (x_hitch + 0.7 * scale, y_ground + 0.7 * scale)
+    ], fc='#f97316', ec='#c2410c', lw=1.8, zorder=6)
+    ax.add_patch(body_poly)
+    
+    cab_poly = patches.Polygon([
+        (x_hitch + 0.8 * scale, y_ground + 1.4 * scale),
+        (x_hitch + 0.8 * scale, y_ground + 2.3 * scale),
+        (x_hitch + 1.8 * scale, y_ground + 2.3 * scale),
+        (x_hitch + 1.9 * scale, y_ground + 1.4 * scale)
+    ], fc='#fdba74', ec='#c2410c', lw=1.8, zorder=6)
+    ax.add_patch(cab_poly)
+    
+    win_poly = patches.Polygon([
+        (x_hitch + 0.95 * scale, y_ground + 1.55 * scale),
+        (x_hitch + 0.95 * scale, y_ground + 2.15 * scale),
+        (x_hitch + 1.65 * scale, y_ground + 2.15 * scale),
+        (x_hitch + 1.75 * scale, y_ground + 1.55 * scale)
+    ], fc='#bae6fd', ec='#0284c7', lw=1.2, zorder=7)
+    ax.add_patch(win_poly)
+    
+    ax.plot([x_hitch + 2.7 * scale, x_hitch + 2.7 * scale],
+            [y_ground + 1.15 * scale, y_ground + 2.4 * scale], color='#334155', lw=3.0, zorder=8)
+    ax.plot([x_hitch + 2.6 * scale, x_hitch + 2.9 * scale],
+            [y_ground + 2.4 * scale, y_ground + 2.4 * scale], color='#334155', lw=2.0, zorder=8)
+    
+    r_rw = 0.75 * scale
+    rw_cx, rw_cy = x_hitch + 0.85 * scale, y_ground + r_rw
+    tire_r = patches.Circle((rw_cx, rw_cy), r_rw, fc='#1e293b', ec='#0f172a', lw=2.0, zorder=8)
+    ax.add_patch(tire_r)
+    rim_r = patches.Circle((rw_cx, rw_cy), r_rw * 0.55, fc='#fef08a', ec='#ca8a04', lw=1.4, zorder=9)
+    ax.add_patch(rim_r)
+    hub_r = patches.Circle((rw_cx, rw_cy), r_rw * 0.18, fc='#1e293b', zorder=10)
+    ax.add_patch(hub_r)
+    
+    r_fw = 0.42 * scale
+    fw_cx, fw_cy = x_hitch + 2.8 * scale, y_ground + r_fw
+    tire_f = patches.Circle((fw_cx, fw_cy), r_fw, fc='#1e293b', ec='#0f172a', lw=1.8, zorder=8)
+    ax.add_patch(tire_f)
+    rim_f = patches.Circle((fw_cx, fw_cy), r_fw * 0.55, fc='#fef08a', ec='#ca8a04', lw=1.2, zorder=9)
+    ax.add_patch(rim_f)
+    hub_f = patches.Circle((fw_cx, fw_cy), r_fw * 0.18, fc='#1e293b', zorder=10)
+    ax.add_patch(hub_f)
+    
+    hitch_cx, hitch_cy = x_hitch, y_ground + 0.55 * scale
+    ax.plot([x_hitch, x_hitch + 0.3 * scale], [hitch_cy, hitch_cy], color='#0f172a', lw=4.0, zorder=7)
+    hitch_pin = patches.Circle((hitch_cx, hitch_cy), 0.12 * scale, fc='#38bdf8', ec='#0284c7', lw=1.5, zorder=8)
+    ax.add_patch(hitch_pin)
+    
+    ax.text(x_hitch + 1.4 * scale, y_ground + 2.65 * scale, '$A$',
+            fontsize=15, fontweight='bold', color='#c2410c', ha='center', zorder=10)
+
+fig = plt.figure(figsize=(10.5, 7.5), dpi=120)
+ax = fig.add_subplot(111)
+ax.set_position([0.02, 0.02, 0.96, 0.95])
+
+x_pulley = 1.6
+r_top = 0.35
+r_load = 0.28
+y_ground = 0.0
+y_hitch_offset = 0.55
+
+def update(frame):
+    t = t_eval[frame]
+    x_val = x0 + vA_val * t
+    l_val = np.sqrt(h**2 + x_val**2)
+    y_val = h - (L_cable - l_val) / 2.0
+    vB_calc = 0.5 * (x_val / l_val) * vA_val
+    
+    x_hitch = x_pulley + x_val
+    y_hitch = y_ground + y_hitch_offset
+    
+    ax.clear()
+    ax.set_aspect('equal')
+    ax.set_xlim(-6.5, 19.5)
+    ax.set_ylim(-1.5, 12.5)
+    ax.axis('off')
+    
+    ground_rect = patches.Rectangle((-6.5, -1.5), 26.0, 1.5, color='#cbd5e1', zorder=1)
+    ax.add_patch(ground_rect)
+    ax.plot([-6.5, 19.5], [y_ground, y_ground], color='#475569', lw=2.5, zorder=2)
+    for gx in np.linspace(-6.0, 19.0, 50):
+        ax.plot([gx, gx + 0.4], [-0.8, y_ground], color='#94a3b8', lw=1.2, zorder=1)
+    
+    ax.plot([x_pulley - 1.0, x_hitch + 3.5], [y_hitch, y_hitch], color='#64748b', linestyle='--', lw=1.4, zorder=2)
+    
+    ceil_rect = patches.Rectangle((x_pulley - 1.2, h + r_top * 0.5), 2.4, 1.2, color='#94a3b8', ec='#475569', lw=2.0, zorder=3)
+    ax.add_patch(ceil_rect)
+    for cx in np.linspace(x_pulley - 1.0, x_pulley + 0.8, 8):
+        ax.plot([cx, cx + 0.3], [h + r_top*0.5, h + r_top*0.5 + 0.8], color='#64748b', lw=1.5, zorder=2)
+    
+    bracket_top = patches.Rectangle((x_pulley - 0.08, h), 0.16, r_top * 0.8, color='#475569', zorder=4)
+    ax.add_patch(bracket_top)
+    
+    cable_color = '#1e293b'
+    cable_lw = 2.4
+    
+    ax.scatter([x_pulley - r_load], [h], color='#0f172a', s=45, zorder=7)
+    ax.plot([x_pulley - r_load, x_pulley - r_load], [h, y_val], color=cable_color, lw=cable_lw, zorder=4)
+    
+    th_b = np.linspace(np.pi, 2*np.pi, 25)
+    ax.plot(x_pulley + r_load * np.cos(th_b), y_val + r_load * np.sin(th_b), color=cable_color, lw=cable_lw, zorder=4)
+    ax.plot([x_pulley + r_load, x_pulley + r_top], [y_val, h], color=cable_color, lw=cable_lw, zorder=4)
+    
+    th_t = np.linspace(0, np.pi/3, 20)
+    ax.plot(x_pulley + r_top * np.cos(th_t), h + r_top * np.sin(th_t), color=cable_color, lw=cable_lw, zorder=4)
+    ax.plot([x_pulley + r_top * np.cos(np.pi/4), x_hitch], [h + r_top * np.sin(np.pi/4), y_hitch],
+            color=cable_color, lw=cable_lw, zorder=4)
+    
+    draw_pulley(ax, x_pulley, h, r_top)
+    draw_pulley(ax, x_pulley, y_val, r_load)
+    
+    bracket_load = patches.Rectangle((x_pulley - 0.08, y_val - 0.7), 0.16, 0.7, color='#64748b', ec='#334155', lw=1.2, zorder=5)
+    ax.add_patch(bracket_load)
+    
+    crate_w, crate_h = 1.5, 1.3
+    crate_b = patches.Rectangle((x_pulley - crate_w/2, y_val - 0.7 - crate_h), crate_w, crate_h,
+                                fc='#d97706', ec='#78350f', lw=2.0, hatch='//', zorder=6)
+    ax.add_patch(crate_b)
+    ax.text(x_pulley, y_val - 0.7 - crate_h/2, '$B$',
+            fontsize=16, fontweight='bold', color='#ffffff', ha='center', va='center', zorder=8)
+    ax.text(x_pulley + crate_w/2 + 0.25, y_val - 0.7 - crate_h/2, '$B$',
+            fontsize=15, fontweight='bold', color='#78350f', va='center', zorder=8)
+    
+    draw_tractor(ax, x_hitch, y_ground, scale=1.35)
+    
+    dim_h_x = -0.6
+    ax.plot([dim_h_x, x_pulley - 0.4], [h, h], color='#64748b', linestyle='--', lw=1.2)
+    ax.plot([dim_h_x, x_pulley - 0.4], [y_hitch, y_hitch], color='#64748b', linestyle='--', lw=1.2)
+    ax.annotate('', xy=(dim_h_x, h), xytext=(dim_h_x, y_hitch),
+                arrowprops=dict(arrowstyle="<->", color='#0f172a', lw=1.6))
+    ax.text(dim_h_x - 0.25, (h + y_hitch) * 0.5, '$h$', fontsize=14, fontweight='bold', color='#0f172a', ha='right', va='center')
+    
+    dim_y_x = 0.3
+    ax.plot([dim_y_x, x_pulley - crate_w/2], [y_val, y_val], color='#64748b', linestyle='--', lw=1.2)
+    ax.plot([dim_y_x, x_pulley - crate_w/2], [y_hitch, y_hitch], color='#64748b', linestyle='--', lw=1.2)
+    ax.annotate('', xy=(dim_y_x, y_val), xytext=(dim_y_x, y_hitch),
+                arrowprops=dict(arrowstyle="<->", color='#0f172a', lw=1.6))
+    ax.text(dim_y_x - 0.2, (y_val + y_hitch) * 0.5, '$y$', fontsize=14, fontweight='bold', color='#0f172a', ha='right', va='center')
+    
+    dim_x_y = -0.5
+    ax.plot([x_pulley, x_pulley], [y_hitch, dim_x_y - 0.2], color='#64748b', linestyle='--', lw=1.2)
+    ax.plot([x_hitch, x_hitch], [y_hitch, dim_x_y - 0.2], color='#64748b', linestyle='--', lw=1.2)
+    ax.annotate('', xy=(x_hitch, dim_x_y), xytext=(x_pulley, dim_x_y),
+                arrowprops=dict(arrowstyle="<->", color='#0f172a', lw=1.6))
+    ax.text((x_pulley + x_hitch) * 0.5, dim_x_y - 0.45, '$x$', fontsize=14, fontweight='bold', color='#0f172a', ha='center')
+    
+    mid_lx = (x_pulley + x_hitch) * 0.5 + 0.6
+    mid_ly = (h + y_hitch) * 0.5 + 0.6
+    ax.text(mid_lx, mid_ly, '$l$', fontsize=14, fontweight='bold', color='#1e293b')
+    
+    arrow_vA_len = 2.4
+    ax.quiver(x_hitch + 2.0, y_ground + 2.65, arrow_vA_len, 0, angles='xy', scale_units='xy', scale=1,
+              color='#16a34a', width=0.007, headwidth=4.5, headlength=5.5, zorder=10)
+    ax.text(x_hitch + 2.0 + arrow_vA_len * 0.5, y_ground + 3.05, f'$v_A = {vA_val:.1f}\\text{{ m/s}} \\rightarrow$',
+            fontsize=11.5, fontweight='bold', color='#16a34a', ha='center')
+    
+    arrow_vB_len = vB_calc * 3.5
+    if arrow_vB_len > 0.3:
+        ax.quiver(x_pulley + crate_w/2 + 0.4, y_val - 0.7 - crate_h/2, 0, arrow_vB_len, angles='xy', scale_units='xy', scale=1,
+                  color='#ea580c', width=0.007, headwidth=4.5, headlength=5.5, zorder=10)
+        ax.text(x_pulley + crate_w/2 + 0.6, y_val - 0.7 - crate_h/2 + arrow_vB_len * 0.5,
+                f'$v_B = {vB_calc:.2f}\\text{{ m/s}} \\uparrow$', fontsize=11.0, fontweight='bold', color='#ea580c', va='center')
+    
+    if "en" == "ko":
+        hud_str = (
+            f"[예제 2.16 트랙터-도르래 구속운동]\n"
+            f"시간 t = {t:4.2f} s / {duration:4.2f} s\n"
+            f"----------------------------------------\n"
+            f"트랙터 전진 속도: v_A = {vA_val:4.2f} m/s\n"
+            f"트랙터 수평 거리: x   = {x_val:4.2f} m\n"
+            f"화물 상승 높이:   y   = {y_val:4.2f} m\n"
+            f"경사 케이블 길이: l   = {l_val:4.2f} m\n"
+            f"----------------------------------------\n"
+            f"▶ 화물 B의 실시간 상승 속도 v_B:\n"
+            f"  v_B = 1/2 · [x / √(h² + x²)] · v_A\n"
+            f"      = {vB_calc:4.2f} m/s (상향)"
+        )
+        title_text = '[동역학 9판 예제 2.16] 트랙터-풀리 시스템 화물 인양 구속운동'
+    else:
+        hud_str = (
+            f"[Sample Prob. 2.16 Tractor-Pulley System]\n"
+            f"Time t = {t:4.2f} s / {duration:4.2f} s\n"
+            f"----------------------------------------\n"
+            f"Tractor Velocity: v_A = {vA_val:4.2f} m/s\n"
+            f"Tractor Distance: x   = {x_val:4.2f} m\n"
+            f"Load Lift Height: y   = {y_val:4.2f} m\n"
+            f"Slanted Length:   l   = {l_val:4.2f} m\n"
+            f"----------------------------------------\n"
+            f"▶ Load B Instantaneous Velocity v_B:\n"
+            f"  v_B = 1/2 · [x / √(h² + x²)] · v_A\n"
+            f"      = {vB_calc:4.2f} m/s (Upward)"
+        )
+        title_text = '[Meriam Dynamics 9th Ed. Ex 2.16] Constrained Motion of Tractor-Lifted Cargo'
+    
+    ax.text(-6.2, 12.1, hud_str, fontsize=9.2, family='monospace',
+            verticalalignment='top', fontproperties=font_prop, zorder=10,
+            bbox=dict(boxstyle='round,pad=0.5', facecolor='#ffffff', edgecolor='#ea580c', lw=1.5, alpha=0.94))
+    
+    deriv_box = patches.FancyBboxPatch((-6.25, 1.2), 5.4, 5.0,
+                                       boxstyle="round,pad=0.15", fc="#ffffff", ec='#0284c7', lw=1.5, alpha=0.94, zorder=9)
+    ax.add_patch(deriv_box)
+    d_title = '구속방정식 유도 (Derivation)' if "en" == "ko" else 'Constrained Equation Derivation'
+    ax.text(-3.55, 5.8, f'[{d_title}]', fontsize=9.5, fontweight='bold', color='#0f172a', ha='center', fontproperties=font_prop, zorder=10)
+    
+    if "en" == "ko":
+        eq1 = '1) 케이블 총 길이:\n   $L = 2(h - y) + l = 2(h - y) + \\sqrt{h^2 + x^2}$'
+        eq2 = '2) 시간에 대한 미분 ($L, h$ 불변):\n   $0 = -2\\dot{y} + \\frac{x\\dot{x}}{\\sqrt{h^2 + x^2}}$'
+        eq3 = '3) $v_A = \\dot{x}, v_B = \\dot{y}$ 대입:\n   $2v_B = \\frac{x v_A}{\\sqrt{h^2 + x^2}}$'
+        eq4 = '▶ 최종 해답 (Answer):\n   $v_B = \\mathbf{\\frac{1}{2} \\frac{x v_A}{\\sqrt{h^2 + x^2}}}$'
+    else:
+        eq1 = '1) Total Cable Length:\n   $L = 2(h - y) + l = 2(h - y) + \\sqrt{h^2 + x^2}$'
+        eq2 = '2) Time Derivative (Constant $L, h$):\n   $0 = -2\\dot{y} + \\frac{x\\dot{x}}{\\sqrt{h^2 + x^2}}$'
+        eq3 = '3) Substitute $v_A = \\dot{x}, v_B = \\dot{y}$:\n   $2v_B = \\frac{x v_A}{\\sqrt{h^2 + x^2}}$'
+        eq4 = '▶ Final Solution:\n   $v_B = \\mathbf{\\frac{1}{2} \\frac{x v_A}{\\sqrt{h^2 + x^2}}}$'
+    
+    ax.text(-6.1, 4.9, eq1, fontsize=8.4, color='#1e293b', fontproperties=font_prop, zorder=10)
+    ax.text(-6.1, 3.8, eq2, fontsize=8.4, color='#1e293b', fontproperties=font_prop, zorder=10)
+    ax.text(-6.1, 2.7, eq3, fontsize=8.4, color='#1e293b', fontproperties=font_prop, zorder=10)
+    ax.text(-6.1, 1.5, eq4, fontsize=8.8, color='#b91c1c', fontweight='bold', fontproperties=font_prop, zorder=10)
+    
+    plt.title(title_text, fontsize=12.5, fontweight='bold', pad=6, fontproperties=font_prop)
+
+if __name__ == '__main__':
+    anim = FuncAnimation(fig, update, frames=n_frames, interval=1000/fps)
+    writer = PillowWriter(fps=fps)
+    out_gif = os.path.join(os.path.dirname(__file__), 'ex2_16_tractor_pulley.gif')
+    anim.save(out_gif, writer=writer)
+    plt.close()

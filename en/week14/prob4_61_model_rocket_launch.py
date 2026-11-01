@@ -1,0 +1,196 @@
+"""
+Engineering Mechanics: Dynamics 9th Ed. Chapter 4 (4.7 Variable Mass)
+Problem 4/61 - Solid-Fuel Model Rocket Launch Acceleration & Burnout Velocity
+- Pure white background (#ffffff) & 1:1 textbook schematic fidelity
+- Theoretical verification:
+  * m_0 = 0.75 kg, fuel = 0.05 kg (m_b = 0.70 kg), t_b = 0.9 s, u = 900 m/s
+  * m' = 0.05 / 0.9 = 0.0556 kg/s
+  * Initial launch acceleration: a_0 = 56.9 m/s^2 (5.80g)
+  * Burnout maximum velocity: v_max = 900 ln(0.75/0.70) - 9.81(0.9) = 53.3 m/s
+"""
+
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from matplotlib.animation import FuncAnimation
+
+plt.rcParams['font.family'] = 'DejaVu Sans'
+plt.rcParams['mathtext.fontset'] = 'stix'
+plt.rcParams['axes.unicode_minus'] = False
+
+# Physical parameters (Problem 4/61)
+m0 = 0.75               # Initial mass (kg)
+dm_fuel = 0.05          # Solid fuel mass (kg)
+mb = m0 - dm_fuel       # 0.70 kg
+tb = 0.90               # Burn duration (s)
+u = 900.0               # Relative exhaust velocity (m/s)
+g = 9.81                # Gravitational acceleration (m/s^2)
+
+m_prime = dm_fuel / tb  # 0.05556 kg/s
+m_dot = -m_prime
+T_thrust = m_prime * u  # 50.0 N
+a0 = (T_thrust - m0 * g) / m0                 # 56.9 m/s^2 (5.80g)
+v_max = u * np.log(m0 / mb) + (g / m_dot) * (m0 - mb)  # 53.3 m/s
+
+n_frames = 50
+t_vals = np.linspace(0.0, tb, n_frames)
+
+fig, (ax_main, ax_calc) = plt.subplots(1, 2, figsize=(14, 6.5), gridspec_kw={'width_ratios': [1.2, 1.0]})
+fig.patch.set_facecolor('#ffffff')
+plt.subplots_adjust(top=0.88, bottom=0.08, left=0.05, right=0.96, wspace=0.15)
+
+
+def draw_model_rocket(ax, xc, yc):
+    bw, bh = 0.24, 1.65
+    body = patches.Rectangle((xc - bw / 2, yc), bw, bh,
+                             facecolor='#4db6ac', edgecolor='#004d40', lw=1.8, zorder=4)
+    ax.add_patch(body)
+    for dy in (0.45, 0.85, 1.25):
+        ax.plot([xc - bw / 2, xc + bw / 2], [yc + dy, yc + dy], color='#00695c', lw=1.0, zorder=5)
+
+    nose_pts = np.array([
+        [xc - bw / 2, yc + bh],
+        [xc + bw / 2, yc + bh],
+        [xc, yc + bh + 0.42]
+    ])
+    ax.add_patch(patches.Polygon(nose_pts, facecolor='#80cbc4', edgecolor='#004d40', lw=1.8, zorder=4))
+
+    fin_l = patches.Polygon([
+        [xc - bw / 2, yc + 0.38],
+        [xc - bw / 2 - 0.28, yc + 0.14],
+        [xc - bw / 2 - 0.28, yc - 0.08],
+        [xc - bw / 2, yc + 0.08]
+    ], facecolor='#4db6ac', edgecolor='#004d40', lw=1.6, zorder=3)
+    fin_r = patches.Polygon([
+        [xc + bw / 2, yc + 0.38],
+        [xc + bw / 2 + 0.28, yc + 0.14],
+        [xc + bw / 2 + 0.28, yc - 0.08],
+        [xc + bw / 2, yc + 0.08]
+    ], facecolor='#4db6ac', edgecolor='#004d40', lw=1.6, zorder=3)
+    ax.add_patch(fin_l)
+    ax.add_patch(fin_r)
+    ax.plot([xc, xc], [yc - 0.06, yc + 0.38], color='#004d40', lw=3.0, zorder=5)
+
+    flame_out = patches.Polygon([
+        [xc - 0.07, yc],
+        [xc + 0.07, yc],
+        [xc, yc - 0.95]
+    ], facecolor='#ff8a65', edgecolor='none', alpha=0.85, zorder=2)
+    flame_in = patches.Polygon([
+        [xc - 0.035, yc],
+        [xc + 0.035, yc],
+        [xc, yc - 0.62]
+    ], facecolor='#fff176', edgecolor='none', alpha=0.95, zorder=3)
+    ax.add_patch(flame_out)
+    ax.add_patch(flame_in)
+
+
+def update(frame):
+    t = t_vals[frame]
+    m_curr = m0 + m_dot * t
+    a_curr = (T_thrust - m_curr * g) / m_curr
+    v_curr = u * np.log(m0 / m_curr) - g * t
+    W_curr = m_curr * g
+
+    yc = 1.05 + 2.05 * (frame / (n_frames - 1))**1.5
+
+    # ---------------- 1. Main Physical Mechanism View ----------------
+    ax_main.cla()
+    ax_main.set_facecolor('#ffffff')
+    ax_main.set_xlim(-2.5, 2.7)
+    ax_main.set_ylim(-0.5, 5.8)
+    ax_main.set_aspect('equal')
+    ax_main.axis('off')
+
+    ax_main.fill_between([-2.1, 2.1], -0.35, 0.0, color='#e0dcd3')
+    ax_main.plot([-2.1, 2.1], [0.0, 0.0], color='#3e2723', lw=2.2)
+
+    stand_pts = np.array([
+        [-0.58, 0.0], [-0.30, 0.45], [0.30, 0.45], [0.58, 0.0],
+        [0.40, 0.0], [0.22, 0.30], [0.08, 0.30], [0.05, 0.0],
+        [-0.05, 0.0], [-0.08, 0.30], [-0.22, 0.30], [-0.40, 0.0]
+    ])
+    ax_main.add_patch(patches.Polygon(stand_pts, facecolor='#607d8b', edgecolor='#263238', lw=1.6, zorder=3))
+
+    for sx, sr in [(-0.85, 0.25), (-0.52, 0.22), (0.52, 0.22), (0.85, 0.25), (0.0, 0.20)]:
+        smoke = patches.Ellipse((sx, 0.52), sr * 2.4, sr * 1.3, facecolor='#eceff1', edgecolor='#cfd8dc', lw=1.0, zorder=1)
+        ax_main.add_patch(smoke)
+
+    draw_model_rocket(ax_main, 0.0, yc)
+
+    # Thrust vector T = 50.0 N (Red)
+    ax_main.annotate('', xy=(0.35, yc + 0.65), xytext=(0.35, yc - 0.15),
+                     arrowprops=dict(arrowstyle='->', color='#d32f2f', lw=2.6, mutation_scale=16), zorder=6)
+    ax_main.text(0.50, yc + 0.25, f'$T = m\'u = {T_thrust:.1f}\\ \\mathrm{{N}}$\n$(u = 900\\ \\mathrm{{m/s}})$',
+                 color='#d32f2f', fontsize=10.2, fontweight='bold', va='center')
+
+    # Weight mg (Red)
+    ax_main.annotate('', xy=(0.35, yc + 0.85), xytext=(0.35, yc + 1.45),
+                     arrowprops=dict(arrowstyle='->', color='#d32f2f', lw=2.2, mutation_scale=14), zorder=6)
+    ax_main.text(0.50, yc + 1.18, f'$mg = {W_curr:.2f}\\ \\mathrm{{N}}$\n$(m = {m_curr:.3f}\\ \\mathrm{{kg}})$',
+                 color='#d32f2f', fontsize=10.0, fontweight='bold', va='center')
+
+    # Velocity & Acceleration (Green)
+    ax_main.annotate('', xy=(-0.45, yc + 1.45), xytext=(-0.45, yc + 0.60),
+                     arrowprops=dict(arrowstyle='->', color='#2e7d32', lw=2.5, mutation_scale=16), zorder=6)
+    ax_main.text(-0.60, yc + 1.02, f'$v = {v_curr:.1f}\\ \\mathrm{{m/s}}$\n$a = {a_curr:.1f}\\ \\mathrm{{m/s^2}}$',
+                 color='#2e7d32', fontsize=10.5, fontweight='bold', ha='right', va='center')
+
+    ax_main.set_title('Problem 4/61: Solid-Fuel Model Rocket Launch', fontsize=13.5, fontweight='bold', pad=12)
+
+    # ---------------- 2. Right Panel (Theoretical Derivation & Live Monitor) ----------------
+    ax_calc.cla()
+    ax_calc.set_facecolor('#ffffff')
+    ax_calc.set_xlim(0, 10)
+    ax_calc.set_ylim(0, 10)
+    ax_calc.axis('off')
+
+    # Top Velocity Profile Plot
+    gx0, gy0, gw, gh = 1.1, 6.70, 8.2, 2.65
+    ax_calc.add_patch(patches.Rectangle((gx0, gy0), gw, gh, facecolor='#ffffff', edgecolor='#b0bec5', lw=1.2))
+    t_dense = np.linspace(0, tb, 80)
+    m_dense = m0 + m_dot * t_dense
+    v_dense = u * np.log(m0 / m_dense) - g * t_dense
+    tx_plot = gx0 + (t_dense / tb) * gw
+    ty_plot = gy0 + (v_dense / 60.0) * gh
+    ax_calc.plot(tx_plot, ty_plot, color='#00796b', lw=2.3)
+
+    cur_px = gx0 + (t / tb) * gw
+    cur_py = gy0 + (v_curr / 60.0) * gh
+    ax_calc.plot(cur_px, cur_py, 'ro', markersize=6, zorder=5)
+    ax_calc.text(gx0 + 0.25, gy0 + gh - 0.38, r'Model Rocket Speed: $v(t) = 900\ln(0.75/m) - 9.81t$',
+                 fontsize=9.5, fontweight='bold', color='#004d40')
+    ax_calc.text(gx0 + gw - 0.2, gy0 + 0.22, r'Initial $a_0 = 56.9\ \mathrm{m/s^2}\ (5.80g),\quad v_{\max} = 53.3\ \mathrm{m/s}$',
+                 fontsize=9.2, fontweight='bold', color='#d32f2f', ha='right')
+
+    # Middle Card: Derivation
+    sol_text = (
+        r"■ Mass Flow Rate ($m'$) & Launch Acceleration ($\dot{v}_0$):" "\n"
+        r"  $\bullet\ m' = \frac{0.05}{0.9} = 0.0556\ \mathrm{kg/s}$ (Assuming constant burn, $pA = R = 0$)" "\n"
+        r"  $\bullet\ m'u - m_0 g = m_0\dot{v}_0 \Rightarrow 0.0556(900) - 0.75(9.81) = 0.75\dot{v}_0 \Rightarrow \mathbf{\dot{v}_0 = 56.9\ \mathrm{m/s^2}\ (5.80g)}$" "\n"
+        r"■ Burnout Velocity ($t_b = 0.9\ \mathrm{s},\ m_b = 0.70\ \mathrm{kg}$):" "\n"
+        r"  $\bullet\ \int_0^{v_{\max}} dv = -u\int_{m_0}^{m_b}\frac{dm}{m} - g\int_0^{t_b} dt$" "\n"
+        r"  $\bullet\ v_{\max} = 900\ln\left(\frac{0.75}{0.70}\right) - 9.81(0.9) \Rightarrow \mathbf{v_{\max} = 53.3\ \mathrm{m/s}}$"
+    )
+    ax_calc.text(0.35, 4.25, sol_text, fontsize=9.4, va='center',
+                 bbox=dict(boxstyle='round,pad=0.45', facecolor='#fbfbfb', edgecolor='#cccccc'))
+
+    # Bottom Card: Real-Time Monitor
+    live_text = (
+        f"[Real-Time Burn Monitor: $t = {t:.2f}\\ /\\ 0.90\\ \\mathrm{{s}}$]\n"
+        f"• Current Mass: $m(t) = {m_curr:.4f}\\ \\mathrm{{kg}}$   |   Thrust: $T = {T_thrust:.1f}\\ \\mathrm{{N}}$ (Constant)\n"
+        f"• Current Acceleration: $a(t) = {a_curr:.1f}\\ \\mathrm{{m/s^2}}$ (Initial Launch: $\\mathbf{{56.9\\ \\mathrm{{m/s^2}}}}$)\n"
+        f"• Current Velocity: $v(t) = {v_curr:.1f}\\ \\mathrm{{m/s}}$ (Theoretical Value: $\\mathbf{{53.3\\ \\mathrm{{m/s}}}}$)"
+    )
+    ax_calc.text(0.35, 1.15, live_text, fontsize=9.3, va='center',
+                 bbox=dict(boxstyle='round,pad=0.4', facecolor='#eef5f9', edgecolor='#90caf9'))
+
+    ax_calc.set_title('Theoretical Derivation & Analysis', fontsize=13.5, fontweight='bold', pad=12)
+
+
+anim = FuncAnimation(fig, update, frames=n_frames, interval=70)
+gif_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'prob4_61_model_rocket_launch.gif')
+anim.save(gif_path, writer='pillow', fps=15)
+plt.close()
+print(f'Saved: {gif_path}')
